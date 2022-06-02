@@ -1,23 +1,23 @@
 package com.kadirkuruca.todolist.ui.tasks
 
 import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import androidx.lifecycle.*
 import com.kadirkuruca.todolist.data.PreferencesManager
 import com.kadirkuruca.todolist.data.SortOrder
 import com.kadirkuruca.todolist.data.Task
-import com.kadirkuruca.todolist.data.TaskDao
 import com.kadirkuruca.todolist.repository.TaskRepository
 import com.kadirkuruca.todolist.ui.ADD_TASK_RESULT_OK
 import com.kadirkuruca.todolist.ui.EDIT_TASK_RESULT_OK
+import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-class TasksViewModel @ViewModelInject constructor(
+@HiltViewModel//https://stackoverflow.com/questions/62471849/cannot-create-instance-of-viewmodel-after-using-hilt-in-android
+class TasksViewModel @Inject constructor(
     private val taskRepository: TaskRepository,
     private val preferencesManager: PreferencesManager,
     @Assisted private val state: SavedStateHandle
